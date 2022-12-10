@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        .parent{
+            border: 7px solid rgb(229, 235, 233);
+            position: fixed;
+            top: 40%;
+            left: 40%;
+            background-color: white;
+        }
+        .form{
+            margin: 30px;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(160, 192, 156);">
+    <div class="parent">
+    <div class="form">
+    <input id="user_input" type="text" placeholder="User name" name="user" required >
+    <p id="usererr" style="color: rgb(225, 34, 34);"></p>
+    <input id="user_pass" type="password" placeholder="Password" name="pass" required>
+    <p id="passerr" style="color: rgb(225, 34, 34);"></p>
+    <button  onclick="showInput()" style="background-color: rgb(82, 143, 82); width: 180px;" >Login</button>
+</div>
+<p id="success"></p>
+</div>
+    <script>
+       
+    function showInput() {  
+        var user = document.getElementById("user_input").value;
+        var pass = document.getElementById("user_pass").value;
+        var Reguser = /admin/i;
+        var Regpass = /123/;
+        var text;
+        if(Reguser.test(user)===true && Regpass.test(pass)===true){
+            msg ="Login success, welcome"+"    "+user;
+            document.getElementById("success").innerHTML = msg;
+    }
+    else if(Reguser.test(user)===false && Regpass.test(pass)===true){
+        text ="Enter valid name";
+        document.getElementById("usererr").innerHTML = text;
+    }
+    else if(Reguser.test(user)===true && Regpass.test(pass)===false){
+        text ="Enter valid name";
+        document.getElementById("passerr").innerHTML = text;
+    }
+    else{
+        text ="Enter valid name & password";
+        document.getElementById("passerr").innerHTML = text;
+    }
+}
+    </script>
+</body>
+</html>

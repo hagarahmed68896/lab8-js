@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch data</title>
+    <style>
+        #leftSide{
+            display: flex;
+            flex-direction: column;
+            width: 10%;
+        }
+    </style>
+</head>
+<body>
+    <div id="show"> </div>
+     <div id="leftSide" > <h1>Images</h1>
+        </div>
+
+    <script>
+        var myRequest = new XMLHttpRequest();
+        myRequest.onreadystatechange = function() {
+            if(this.readyState===4 && this.status===200){
+                var jsObject =JSON.parse(this.responseText);
+                var arr = jsObject.data;
+                var myText="" ;
+
+                var theLeftSide = document.getElementById("leftSide");
+
+                function generate_faces() {
+                    for (i = 0;i < arr.length; i++) {
+                        newFace = document.createElement("img");
+                        newFace.setAttribute("src",arr[i].avatar);
+                       (i+1)+ theLeftSide.appendChild(newFace);
+                    }   
+                }
+                generate_faces();
+
+                for(var i=0;i<arr.length;i++){
+                    myText = myText+(i+1)+"-"+" Email: " +arr[i].email  + "<br>"
+                }
+                 document.getElementById("show").innerHTML=myText;
+            }
+        };
+        myRequest.open('GET','https://reqres.in/api/users?page=2',true);
+        myRequest.send();
+      
+    </script>
+</body>
+</html>
